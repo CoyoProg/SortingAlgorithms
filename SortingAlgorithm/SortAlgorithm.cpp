@@ -84,11 +84,10 @@ void SortAlgorithm::QuickSort(std::vector<int>& listToSortP)
 {
 	std::cout << "~~~~~ Sorting ~~~~~~" << std::endl;
 
-	int lastIndex = listToSortP.size() - 1;
-	int pivot = listToSortP[lastIndex];
+	int pivot = listToSortP.size() - 1;
 	int firstIndex = 0;
 
-	QuickSort(listToSortP, firstIndex, lastIndex);
+	QuickSort(listToSortP, firstIndex, pivot);
 
 	ShowResult(listToSortP);
 }
@@ -109,18 +108,44 @@ void SortAlgorithm::QuickSort(std::vector<int>& listToSortP, int firstIndexP, in
 
 int SortAlgorithm::QuickSortPartition(std::vector<int>& listToSortP, int firstIndexP, int lastIndexP)
 {
-	int pivot = listToSortP[lastIndexP];				// Pivot is the value of the last element
+	int pivot = lastIndexP;				// Pivot is the value of the last element
 	int lastIndex = lastIndexP;
 	bool nothingHappened = true;
 
-	for (int i = firstIndexP; i < lastIndex;)
+	for (int i = 0; i < pivot;)
 	{
-		if (listToSortP[i] > pivot)
+		// If the current element is bigger than the pivot
+		if (listToSortP[i] > listToSortP[pivot])
 		{
-			std::rotate(listToSortP.begin() + i, listToSortP.begin() + i + 1, listToSortP.begin() + lastIndex + 1);
-			lastIndex--;
+			/** We save the value before moving the values */
+			int temporary = listToSortP[i];
+
+			/** Then we assign the current element to the value before the pivot */
+			listToSortP[i] = listToSortP[pivot - 1];
+
+			/** And assign the element before the pivot to the value of the pivot */
+			listToSortP[pivot - 1] = listToSortP[pivot];
+
+			/** And finaly assign the value of the pivot to the temporary value, 
+				We moved the current value to the right of the pivot,
+				Moved the value before the pivot where was the current value,
+				And move the pivot one time to the left */ 
+
+			listToSortP[pivot] = temporary;
+			pivot -= 1;
 
 			nothingHappened = false;
+
+
+
+			// WE COULD JUST USE ROTATE BUT I CANT FIGURE OUT HOW TO MAKE IT WORK WHEN PIVOT > i ;
+			/** We move the lower value after the pivot */
+			//std::rotate(listToSortP.begin() + i, listToSortP.begin() + i + 1, listToSortP.begin() + pivot + 1);
+
+			//pivot--;
+
+			/** And we move the value before the pivot where the lower value was */
+			//std::rotate(listToSortP.begin() + i, listToSortP.begin() + pivot, listToSortP.begin() + pivot + 1);
 		}
 		else
 			i++;
@@ -136,7 +161,7 @@ int SortAlgorithm::QuickSortPartition(std::vector<int>& listToSortP, int firstIn
 		std::cout << std::endl;
 	}
 
-	return (lastIndex);
+	return (pivot);
 }
 
 void SortAlgorithm::ShowResult(std::vector<int>& listToSortP)
