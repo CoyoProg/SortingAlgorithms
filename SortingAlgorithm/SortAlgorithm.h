@@ -10,5 +10,7 @@ public:
 
 private:
 	static void ShowResult(std::vector<int>& listToSortP);
+	static void QuickSort(std::vector<int>& listToSortP, int firstIndexP, int lastIndexP);
+	static int QuickSortPartition(std::vector<int>& listToSortP, int firstIndexP, int lastIndexP);
 };
 

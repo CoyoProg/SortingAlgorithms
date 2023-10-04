@@ -3,10 +3,14 @@
 
 void ChooseAlgorithm();
 
+void GenerateRandomVector(std::vector<int>& vec);
+
 #define clearConsole std::cout << "\x1B[2J\x1B[H";
 
 int main()
 {
+	srand(time(NULL));
+
 	ChooseAlgorithm();
 
 	return 0;
@@ -46,16 +50,10 @@ void ChooseAlgorithm()
 
 	std::cout << "\033[33m";
 
-	/** Initialize vector to sort*/
-	std::vector<int> vec = { 64, 34, 15, 12, 22, 11, 90 };
-	std::cout << "Original vector: ";
-	for (int num : vec)						// Print the original vector
-	{
-		std::cout << num << " ";
-	}
-	std::cout << "\033[37m";
-	std::cout << std::endl;
 
+	/** Initialize vector to sort*/
+	std::vector<int> vec;
+	GenerateRandomVector(vec);
 
 	/** Depending on choice, run the Algorithm to sort the vector */
 	switch (choice)
@@ -78,4 +76,22 @@ void ChooseAlgorithm()
 
 	clearConsole;
 	ChooseAlgorithm();
+}
+
+void GenerateRandomVector(std::vector<int>& vec)
+{
+	int listSize = 6 + rand() % 5;
+	for (int i = 0; i < listSize; i++)
+	{
+		vec.push_back(rand() % 100);
+	}
+
+
+	std::cout << "Original vector: ";
+	for (int num : vec)						// Print the original vector
+	{
+		std::cout << num << " ";
+	}
+	std::cout << "\033[37m";
+	std::cout << std::endl;
 }

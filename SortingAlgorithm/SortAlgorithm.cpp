@@ -79,10 +79,65 @@ void SortAlgorithm::SelectionSort(std::vector<int>& listToSortP)
 	ShowResult(listToSortP);
 }
 
+/** Warper Function for Quick Sort */
 void SortAlgorithm::QuickSort(std::vector<int>& listToSortP)
 {
+	std::cout << "~~~~~ Sorting ~~~~~~" << std::endl;
+
+	int lastIndex = listToSortP.size() - 1;
+	int pivot = listToSortP[lastIndex];
+	int firstIndex = 0;
+
+	QuickSort(listToSortP, firstIndex, lastIndex);
+
+	ShowResult(listToSortP);
 }
 
+/** Divide the list in two list */
+void SortAlgorithm::QuickSort(std::vector<int>& listToSortP, int firstIndexP, int lastIndexP)
+{
+	if (firstIndexP < lastIndexP)
+	{
+		// Partition the array into two sub-arrays
+		int divideIndex = QuickSortPartition(listToSortP, firstIndexP, lastIndexP);
+
+		// Recursively sort into 2 sub-arrays
+		QuickSort(listToSortP, firstIndexP, divideIndex - 1);
+		QuickSort(listToSortP, divideIndex, lastIndexP);
+	}
+}
+
+int SortAlgorithm::QuickSortPartition(std::vector<int>& listToSortP, int firstIndexP, int lastIndexP)
+{
+	int pivot = listToSortP[lastIndexP];				// Pivot is the value of the last element
+	int lastIndex = lastIndexP;
+	bool nothingHappened = true;
+
+	for (int i = firstIndexP; i < lastIndex;)
+	{
+		if (listToSortP[i] > pivot)
+		{
+			std::rotate(listToSortP.begin() + i, listToSortP.begin() + i + 1, listToSortP.begin() + lastIndex + 1);
+			lastIndex--;
+
+			nothingHappened = false;
+		}
+		else
+			i++;
+	}
+
+	if (!nothingHappened)
+	{
+		for (int num : listToSortP)
+		{
+			std::cout << num << " ";
+		}
+
+		std::cout << std::endl;
+	}
+
+	return (lastIndex);
+}
 
 void SortAlgorithm::ShowResult(std::vector<int>& listToSortP)
 {
