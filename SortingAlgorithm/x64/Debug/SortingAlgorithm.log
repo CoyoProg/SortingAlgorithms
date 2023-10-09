@@ -1,5 +1,0 @@
-﻿  SortAlgorithm.cpp
-C:\Users\cpaya\Documents\ArtFx\Cpp\SortingAlgorithm\SortingAlgorithm\SortAlgorithm.cpp(9,17): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\cpaya\Documents\ArtFx\Cpp\SortingAlgorithm\SortingAlgorithm\SortAlgorithm.cpp(47,17): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\cpaya\Documents\ArtFx\Cpp\SortingAlgorithm\SortingAlgorithm\SortAlgorithm.cpp(87,12): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-  SortingAlgorithm.vcxproj -> C:\Users\cpaya\Documents\ArtFx\Cpp\SortingAlgorithm\x64\Debug\SortingAlgorithm.exe
